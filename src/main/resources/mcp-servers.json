@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "jimeng": {
+      "command": "cmd.exe",
+      "args": ["/c", "npx", "-y", "jimeng4-mcp"],
+      "env": {
+        "JIMENG_ACCESS_KEY": "AKLTYjEyNmMxZjM3MGMzNDllZWFlMzg1OTBiZGIzZDcwZGU",
+        "JIMENG_SECRET_KEY": "Tm1FNU5XSTJZemxpWldJM05HTTVPV0l3WlRZNE9ESmlOV1F5WldWak5ESQ=="
+      }
+    }
+  }
+}

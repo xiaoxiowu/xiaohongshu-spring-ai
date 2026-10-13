@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    io.modelcontextprotocol.client.LifecycleInitializer: error
+
+spring:
+  application:
+    name: xiaohongshu-spring-ai
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:xiaohongshu_ai}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 123456
+  ai:
+    openai:
+      api-key: sk-285fbf51fcee469b97acc32f078a8dda
+      base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+      chat:
+        options:
+          model: ${DEEPSEEK_MODEL:deepseek-flash}
+          temperature: 0.7
+    mcp:
+      client:
+        enabled: true
+        name: xiaohongshu-spring-ai
+        type: SYNC
+        streamable-http:
+          connections:
+            xiaohongshu:
+              url: http://localhost:18060
+              endpoint: /mcp
+        stdio:
+          servers-configuration: classpath:mcp-servers.json
+
+xhs:
+  assets:
+    image-dir: ${XHS_ASSET_DIR:./data/assets/images}
+  topic-analysis:
+    provider: ${XHS_TOPIC_ANALYSIS_PROVIDER:mediacrawler}
+  mediacrawler:
+    work-dir: ${XHS_MEDIACRAWLER_WORK_DIR:E:/workspace/MediaCrawler-main}
+    command: ${XHS_MEDIACRAWLER_COMMAND:uv}
+    get-comments: ${XHS_MEDIACRAWLER_GET_COMMENTS:false}
+    max-comments-per-note: ${XHS_MEDIACRAWLER_MAX_COMMENTS_PER_NOTE:5}
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
